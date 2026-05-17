@@ -4,27 +4,40 @@ let currentPlayer = null;
 async function searchPlayer() {
     const name = document.getElementById("playerName").value;
 
-    const res = await fetch(`/api/player/${name}`);
-    const data = await res.json();
+    if (!name) return alert("Enter a player name");
+
+    try {
+      const res = await fetch(`/api/player/${name}`);
+      const data = await res.json();
+
+    if (!res.ok) {
+      console.log(data);
+      return alert("Player not found or API error");
+    }
 
     currentPlayer = data;
 
     document.getElementById("results").innerText =
-    JSON.stringify(data.profile, null, 2);
+      JSON.stringify(data.profile, null, 2);
 
     renderChart(data.stats);
+  } catch (err) {
+    console.error(err);
+  }
 }
 // Save Player 
-async function searchPlayer() {
+async function savePlayer() {
     if (!currentPlayer) return alert("Search a player first!");
 
-    await fetch("/players", {
+    const res = await fetch("/players", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
         username: currentPlayer.profile.name,
         }),
     });
+    const data = await res.json();
+    console.log("Saved:", data);
 
     alert("Player saved!");
 }

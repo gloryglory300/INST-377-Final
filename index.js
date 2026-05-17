@@ -11,12 +11,18 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
-const supabase = supabaseClient.createClient(
+// Supabase 
+const { createClient } = require("@supabase/supabase-js");
+
+const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
+// Marvel API Key
 const API_KEY = process.env.MARVEL_API_KEY;
+
+console.log("Loaded Marvel API Key:", API_KEY ? "YES" : "NO");
 
 // Pages
 
@@ -32,7 +38,7 @@ app.get("/tracker", (req, res) => {
   res.sendFile("public/tracker.html", { root: __dirname });
 });
 
-// Supabase Read
+// Get Players
 
 app.get("/players", async (req, res) => {
   const { data, error } = await supabase.from("players").select("*");
@@ -41,7 +47,7 @@ app.get("/players", async (req, res) => {
   res.json(data);
 });
 
-// Supabase Write
+// POST players
 
 app.post("/players", async (req, res) => {
   const { username } = req.body;
@@ -51,15 +57,22 @@ app.post("/players", async (req, res) => {
     .insert([{ username }])
     .select();
 
-  if (error) return res.status(500).json(error);
-  res.json(data);
+    if (error) {
+      console.error("Supabase insert error:", error);
+      return res.status(500).json(error);
+    }
+
+    console.log("Inserted into Supabase:", data);
+    res.json(data);
 });
-// External API
+
+// Marvel API
 
 app.get("/api/player/:name", async (req, res) => {
   try {
     const name = req.params.name;
 
+    // Find players
     const findRes = await fetch(
       `https://marvelrivalsapi.com/api/v1/find-player/${name}`,
       {
@@ -69,6 +82,16 @@ app.get("/api/player/:name", async (req, res) => {
 
     const findData = await findRes.json();
 
+    // Handle API errors properly!!
+
+        if (!findRes.ok || !findData.uid) {
+      return res.status(400).json({
+        error: "Failed to find player",
+        raw: findData,
+      });
+    }
+
+    // Get Stats
     const statsRes = await fetch(
       `https://marvelrivalsapi.com/api/v1/player/${findData.uid}`,
       {
@@ -83,6 +106,7 @@ app.get("/api/player/:name", async (req, res) => {
       stats: stats,
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
