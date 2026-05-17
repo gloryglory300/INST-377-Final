@@ -1,0 +1,41 @@
+<html>
+    <head>
+    <title>Tracker</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+
+    <nav>
+    <h1>Marvel Rivals Tracker</h1>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="tracker.html">Tracker</a></li>
+    </ul>
+    </nav>
+    <section class="tracker-page">
+
+    <h2>Player Search</h2>
+
+    <input type="text" id="username" placeholder="Enter Username">
+
+    <button onclick="searchPlayer()">Search</button>
+
+    <div id="playerCard"></div>
+
+    <canvas id="statsChart"></canvas>
+
+    <h2>Favorite Players</h2>
+
+    <div id="favoritesContainer"></div>
+
+    </section>
+
+    <script src="js/tracker.js"></script>
+
+    </body>
+</html>
