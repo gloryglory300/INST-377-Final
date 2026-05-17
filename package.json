@@ -1,29 +1,37 @@
 {
-  "name": "inst377-week13-sampleapp-fa26",
+  "name": "inst-377-final",
   "version": "1.0.0",
-  "description": "INST377 - Week 13 Sample App",
-  "homepage": "https://github.com/anmoldash98/inst377-week13-sampleapp-fa26#readme",
+  "description": "",
+  "homepage": "https://github.com/gloryglory300/INST-377-Final#readme",
   "bugs": {
-    "url": "https://github.com/anmoldash98/inst377-week13-sampleapp-fa26/issues"
+    "url": "https://github.com/gloryglory300/INST-377-Final/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anmoldash98/inst377-week13-sampleapp-fa26.git"
+    "url": "git+https://github.com/gloryglory300/INST-377-Final.git"
   },
   "license": "ISC",
-  "author": "Anmol Dash",
+  "author": "Eliott Perez",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -e '*'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "start": "vite"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.104.1",
-    "body-parser": "^2.2.2",
+    "@supabase/supabase-js": "^2.105.4",
+    "detect-libc": "^2.1.2",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "nodemon": "^3.1.14",
-    "usa-state-validator": "^1.0.6"
+    "fdir": "^6.5.0",
+    "lightningcss": "^1.32.0",
+    "lightningcss-win32-x64-msvc": "^1.32.0",
+    "nanoid": "^3.3.12",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.4",
+    "postcss": "^8.5.14",
+    "rolldown": "^1.0.1",
+    "source-map-js": "^1.2.1",
+    "tinyglobby": "^0.2.16"
   }
 }
