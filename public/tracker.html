@@ -5,11 +5,17 @@
     <link rel="stylesheet" href="styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="/js/tracker.js" defer></script>
     </head>
     <body>
 
     <nav>
-    <h1>Marvel Rivals Tracker</h1>
+    <h1>Marvel Rivals Player Tracker</h1>
 
     <ul>
         <li><a href="index.html">Home</a></li>
@@ -18,24 +24,18 @@
     </ul>
     </nav>
     <section class="tracker-page">
+    
+    <h1>Player Tracker</h1>
 
-    <h2>Player Search</h2>
-
-    <input type="text" id="username" placeholder="Enter Username">
-
+    <input id="playerName" placeholder="Enter player name" />
     <button onclick="searchPlayer()">Search</button>
 
-    <div id="playerCard"></div>
+    <button onclick="savePlayer()">Save Player</button>
 
+    <h2>Stats</h2>
     <canvas id="statsChart"></canvas>
 
-    <h2>Favorite Players</h2>
-
-    <div id="favoritesContainer"></div>
-
-    </section>
-
-    <script src="js/tracker.js"></script>
+    <div id="results"></div>
 
     </body>
 </html>
