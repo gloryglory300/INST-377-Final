@@ -50,20 +50,43 @@ app.get("/players", async (req, res) => {
 // POST players
 
 app.post("/players", async (req, res) => {
-  const { username } = req.body;
+  
+  try {
+    const { username,stats } = req.body;
 
-  const { data, error } = await supabase
+    console.log("Incoming POST:", { username, stats });
+
+   if (!stats || !stats.overall_stats) {
+      return res.status(400).json({ error: "Invalid stats object missing overall_stats",
+      });
+    }
+    
+    const { data, error } = await supabase
     .from("players")
-    .insert([{ username }])
+    .insert([
+      {
+        username,
+          uid: stats.uid ?? null,
+          wins: stats.overall_stats.total_wins ?? 0,
+          matches: stats.overall_stats.total_matches ?? 0,
+          kills: stats.overall_stats.ranked?.total_kills ?? 0,
+          deaths: stats.overall_stats.ranked?.total_deaths ?? 0,
+          assists: stats.overall_stats.ranked?.total_assists ?? 0,
+      },
+    ])
     .select();
 
     if (error) {
-      console.error("Supabase insert error:", error);
+      console.error("SUPABASE ERROR:", error);
       return res.status(500).json(error);
     }
 
-    console.log("Inserted into Supabase:", data);
     res.json(data);
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Marvel API

@@ -2,7 +2,7 @@
     <head>
     <title>Tracker</title>
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
@@ -32,10 +32,16 @@
 
     <button onclick="savePlayer()">Save Player</button>
 
-    <h2>Stats</h2>
+    <!-- Stats -->
+    <div class="chart-container">
+
+    <h2>Matches Overview for Current Season</h2>
     <canvas id="statsChart"></canvas>
 
-    <div id="results"></div>
+    <h2>Combat Stats for Current Season</h2>
+    <canvas id="combatChart"></canvas>
 
+    <div id="results"></div>
+    </div>
     </body>
 </html>
