@@ -56,7 +56,7 @@ Fetches external Marvel Rivals API data + stats.
 
 ## Known Issues
 - API rate limits may delay responses
-- Stats may be missing for new players
+- Stats may be missing for new players and will only show stats for current season ( which came out recently so overall matches and stats may be low)
 - Stats do not show for players with parts of their profiles private 
 (ex. my profile "enteh" will currently return "null" for all entries but the pro player "Sypeh" or 
 "TSM Bready" will return results)
